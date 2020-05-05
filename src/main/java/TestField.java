@@ -16,11 +16,10 @@ public class TestField {
         String my_balance_s = my_balance_scan.nextLine();
         balance = Double.parseDouble(my_balance_s);
         }
-        
         System.out.println("Your balance is " + balance + "!");
-        int my_bet = 0;
         
         //bet_amount
+        int my_bet = 0;
         while (my_bet == 0 || my_bet < 0 || my_bet > balance) {
         Scanner my_bet_scan = new Scanner(System.in);
         System.out.println("How big would be your bet: ");
@@ -80,11 +79,11 @@ public class TestField {
             
             //Under_Multiple
             if (my_changeover.contentEquals("Under") || my_changeover.contentEquals("1")) {
-            if (my_chance >= res) {
+            if (my_chance > res) {
                 balance = balance + (98.98/my_chance * my_bet - my_bet);
                 my_iterations = my_iterations - 1;
                 System.out.println("Win! Balance: " + res_s.format(balance) + " xBet: " + res_s.format(98.98/my_chance) + " My chance: " + res_s.format(my_chance) + " Proc: " + res_s.format(res));
-            } else if (my_chance < res) {
+            } else if (my_chance <= res) {
                 balance = balance - my_bet;
                 my_iterations = my_iterations - 1;
                 System.out.println("Lose. Balance: " + res_s.format(balance) + " Proc: " + res_s.format(res) + " Chance: " + res_s.format(my_chance));
@@ -92,15 +91,16 @@ public class TestField {
             }
             
             //Over_Multiple
-            if (my_changeover.contentEquals("Over") || my_changeover.contentEquals("2")) {
-                if (my_chance <= res) {
-                balance = balance + (98.98/my_chance * my_bet - my_bet);
+            else if (my_changeover.contentEquals("Over") || my_changeover.contentEquals("2")) {
+                double my_chance_1 = 99.99 - my_chance;
+                if (my_chance_1 < res) {
+                balance = balance + ((98.98/8.08)/my_chance * my_bet - my_bet);
                 my_iterations = my_iterations - 1;
-                System.out.println("Win! Balance: " + res_s.format(balance) + " xBet: " + res_s.format(98.98/my_chance) + " My chance: " + res_s.format(my_chance) + " Proc: " + res_s.format(res));
-            } else if (my_chance > res) {
+                System.out.println("Win! Balance: " + res_s.format(balance) + " xBet: " + res_s.format(98.98/my_chance) + " My chance: " + res_s.format(my_chance_1) + " Proc: " + res_s.format(res));
+            } else if (my_chance_1 >= res) {
                 balance = balance - my_bet;
                 my_iterations = my_iterations - 1;
-                System.out.println("Lose. Balance: " + res_s.format(balance) + " Proc: " + res_s.format(res) + " Chance: " + res_s.format(my_chance));
+                System.out.println("Lose. Balance: " + res_s.format(balance) + " Proc: " + res_s.format(res) + " Chance: " + res_s.format(my_chance_1));
             }
             }
             
@@ -122,12 +122,13 @@ public class TestField {
             }
             //Over_single
             else if (my_changeover.contentEquals("Over") || my_changeover.contentEquals("2")) {
-                if (my_chance <= res) {
+                double my_chance_1 = 99.99 - my_chance;
+                if (my_chance_1 <= res) {
                 balance = balance + (98.98/my_chance * my_bet - my_bet);
-                System.out.println("Win! Balance: " + res_s.format(balance) + " xBet: " + res_s.format(98.98/my_chance) + " My chance: " + res_s.format(my_chance) + " Proc: " + res_s.format(res));
-            } else if (my_chance > res) {
+                System.out.println("Win! Balance: " + res_s.format(balance) + " xBet: " + res_s.format(98.98/my_chance) + " My chance: " + res_s.format(my_chance_1) + " Proc: " + res_s.format(res));
+            } else if (my_chance_1 > res) {
                 balance = balance - my_bet;
-                System.out.println("Lose. Balance: " + res_s.format(balance) + " Proc: " + res_s.format(res) + " Chance: " + res_s.format(my_chance));
+                System.out.println("Lose. Balance: " + res_s.format(balance) + " Proc: " + res_s.format(res) + " Chance: " + res_s.format(my_chance_1));
             } 
 
             }
